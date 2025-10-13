@@ -1,129 +1,74 @@
+/* ===== Reset básico ===== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: "Poppins", sans-serif;
-  }
-  
-  header {
-    background-color: #424e61;
-    color: white;
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .cabecalho-itens {
-    max-width: 1980px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .cabecalho-imagem {
-    width: 6%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  
-  .titulo_site {
-    padding: 50px;
-    text-align: center;
-    width: 50%;
-    font-size: 30px;
-  }
-  
-  .sociais {
-    display: flex;
-    justify-content: flex-end;
-    width: 25%;
-    padding-right: 30px;
-  }
-  
-  .banner1 {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .estudante_titulo {
-    padding: 50px;
-    text-align: center;
-  }
-  
-  .estudante-nome {
-    text-align: center;
-  }
-  
-  .estudante-imagem {
-    width: 120px;
-  }
-  
-  .estudante-icone {
-    width: 38px;
-    padding: 4px 8px;
-  }
-  
-  .estudante {
-    background-color: #2df788;
-    padding: 24px 0;
-    text-align: center;
-  }
-  
-  .estudante-div {
-    text-align: center;
-    padding: 24px 0;
-  }
-  
-  .estudantes_todos {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .escola {
-    background-image: linear-gradient(#40A2E3, #297bb3);
-    color: white;
-    padding: 24px 0;
-    text-align: center;
-  }
-  
-  .escola-titulo {
-    padding: 50px;
-    text-align: center;
-  }
-  
-  .logo_rodape {
-    height: 80px;
-    padding: 12px 0;
-  }
-  
-  .link {
-    color: #ffffff;
-    text-decoration: none;
- /* ===== Geral: transições suaves e fade-in inicial ===== */
-body {
-  transition: background-color 300ms ease, color 300ms ease;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body.fade-start {
-  opacity: 0;
+
+body {
+  font-family: "Poppins", sans-serif;
+
+  /* ===== Fade-in inicial ===== */
+  opacity: 0;               
   transform: translateY(6px);
   transition: opacity 600ms ease, transform 600ms ease;
+
+  /* Transições suaves para tema escuro/claro */
+  transition: background-color 300ms ease, color 300ms ease;
 }
-body.fade-start.fade-ready {
+
+/* Quando a página estiver pronta, ativar fade-in */
+body.fade-ready {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ===== Banner (carrossel) ===== */
+/* ===== Header ===== */
+header {
+  background-color: #424e61;
+  color: white;
+  width: 100%;
+  padding: 20px;
+}
+
+.cabecalho-itens {
+  max-width: 1980px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cabecalho-imagem {
+  width: 6%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.titulo_site {
+  padding: 50px;
+  text-align: center;
+  width: 50%;
+  font-size: 30px;
+}
+
+.sociais {
+  display: flex;
+  justify-content: flex-end;
+  width: 25%;
+  padding-right: 30px;
+}
+
+/* ===== Banner ===== */
 .banner1 {
+  display: flex;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  max-height: 420px; /* ajuste se quiser */
+  max-height: 420px; 
 }
+
 .banner1 img {
   width: 100%;
   height: auto;
@@ -131,11 +76,71 @@ body.fade-start.fade-ready {
   transition: opacity 600ms ease;
   opacity: 1;
 }
+
 .banner1 img.fading {
   opacity: 0;
 }
 
-/* ===== Barra de busca no header ===== */
+/* ===== Seções estudantes ===== */
+.estudante_titulo {
+  padding: 50px;
+  text-align: center;
+}
+
+.estudante-nome {
+  text-align: center;
+}
+
+.estudante-imagem {
+  width: 120px;
+}
+
+.estudante-icone {
+  width: 38px;
+  padding: 4px 8px;
+}
+
+.estudante {
+  background-color: #2df788;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.estudante-div {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.estudantes_todos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+/* ===== Footer ===== */
+.escola {
+  background-image: linear-gradient(#40A2E3, #297bb3);
+  color: white;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.escola-titulo {
+  padding: 50px;
+  text-align: center;
+}
+
+.logo_rodape {
+  height: 80px;
+  padding: 12px 0;
+}
+
+.link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ===== Barra de busca animada ===== */
 header .busca-animada {
   margin-left: 12px;
   padding: 6px 10px;
@@ -144,12 +149,13 @@ header .busca-animada {
   outline: none;
   transition: box-shadow 200ms ease, transform 200ms ease;
 }
+
 header .busca-animada:focus {
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
   transform: translateY(-2px);
 }
 
-/* ===== Eventos (calendário simples) ===== */
+/* ===== Eventos ===== */
 .eventos-wrapper {
   max-width: 1000px;
   margin: 24px auto;
@@ -159,14 +165,16 @@ header .busca-animada:focus {
   box-shadow: 0 6px 20px rgba(0,0,0,0.03);
   transition: transform 300ms ease, opacity 300ms ease;
 }
+
 .eventos-wrapper h2 {
   margin: 0 0 10px 0;
 }
+
 .lista-eventos li {
   margin: 6px 0;
 }
 
-/* ===== Botão tema e área restrita (header) ===== */
+/* ===== Botões tema e login ===== */
 header .botao-tema,
 header .abrir-login {
   margin-left: 8px;
@@ -177,8 +185,11 @@ header .abrir-login {
   cursor: pointer;
   transition: background-color 200ms ease, transform 120ms ease;
 }
+
 header .botao-tema:hover,
-header .abrir-login:hover { transform: translateY(-2px); }
+header .abrir-login:hover {
+  transform: translateY(-2px);
+}
 
 /* ===== Modal de login ===== */
 .modal-overlay {
@@ -193,10 +204,12 @@ header .abrir-login:hover { transform: translateY(-2px); }
   transition: opacity 220ms ease;
   z-index: 80;
 }
+
 .modal-overlay.ativo {
   opacity: 1;
   pointer-events: auto;
 }
+
 .modal-card {
   width: 320px;
   max-width: calc(100% - 40px);
@@ -207,7 +220,11 @@ header .abrir-login:hover { transform: translateY(-2px); }
   transform: translateY(8px);
   transition: transform 220ms ease;
 }
-.modal-overlay.ativo .modal-card { transform: translateY(0); }
+
+.modal-overlay.ativo .modal-card {
+  transform: translateY(0);
+}
+
 .modal-card input {
   width: 100%;
   padding: 8px 10px;
@@ -216,12 +233,16 @@ header .abrir-login:hover { transform: translateY(-2px); }
   border: 1px solid #ddd;
 }
 
-/* mensagens no modal */
-.modal-msg { margin-top: 6px; font-size: 0.95rem; }
+/* Mensagens no modal */
+.modal-msg {
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
 .modal-msg.erro { color: #b00020; }
 .modal-msg.sucesso { color: #007a2f; }
 
-/* botão fechar modal */
+/* Botão fechar modal */
 .modal-fechar {
   position: absolute;
   right: 12px;
@@ -248,6 +269,7 @@ button.topo {
   transition: transform 220ms ease, opacity 220ms ease;
   z-index: 90;
 }
+
 button.topo.mostra {
   transform: translateY(0);
   opacity: 1;
@@ -259,18 +281,18 @@ button.topo.mostra {
   --fg: #222222;
   --card: #fafafa;
 }
+
 body.dark {
   --bg: #0f1720;
   --fg: #e6eef8;
   --card: #111827;
 }
+
 body { background-color: var(--bg); color: var(--fg); }
 .eventos-wrapper { background: var(--card); }
 
-/* ===== pequenas responsividades ===== */
+/* ===== Pequenas responsividades ===== */
 @media (max-width:700px) {
   .banner1 { max-height: 260px; }
-  header .busca-animada { display: none; } /* esconde em telas pequenas */
+  header .busca-animada { display: none; }
 }
-
-   }

@@ -1,14 +1,15 @@
 // script.js - explicação detalhada abaixo (carrossel, eventos, busca, login, tema, topo, fade-in)
 
 /* ------------------ Fade-in inicial ------------------ */
-// colocar classe inicial para controlar a transição via CSS
-document.body.classList.add("fade-start");
+// 1️⃣ Seleciona o body da página
+const body = document.querySelector('body');
 
-// quando DOM e recursos carregarem, ativamos a transição
-window.addEventListener("load", () => {
-  // requestAnimationFrame garante que a mudança ocorra no próximo frame (evita "pular" a animação)
-  requestAnimationFrame(() => document.body.classList.add("fade-ready"));
+// 2️⃣ Adiciona a classe 'fade-ready' quando a página carregar
+window.addEventListener('load', () => {
+  // Aqui estamos esperando a página carregar totalmente
+  body.classList.add('fade-ready');
 });
+
 
 /* ------------------ CARROSSEL (crossfade) ------------------ */
 // lista de imagens (coloque os nomes que existem na sua pasta)
