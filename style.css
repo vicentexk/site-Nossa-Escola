@@ -8,11 +8,17 @@
 body {
   font-family: "Poppins", sans-serif;
 
-  /* ===== Fade-in inicial ===== */
-  opacity: 0;               
+  /* Fade-in inicial */
+  opacity: 0;
   transform: translateY(6px);
-  transition: opacity 600ms ease, transform 600ms ease;
 
+  /* Todas as transições juntas */
+  transition: 
+    opacity 600ms ease,
+    transform 600ms ease,
+    background-color 300ms ease,
+    color 300ms ease;
+}
   /* Transições suaves para tema escuro/claro */
   transition: background-color 300ms ease, color 300ms ease;
 }
