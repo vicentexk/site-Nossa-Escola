@@ -44,7 +44,8 @@ header {
 }
 
 .cabecalho-imagem {
-  width: 16px; /* tamanho fixo */
+   padding: 12px 20px;
+  width: 20px; /* tamanho fixo */
   display: flex;
   justify-content: flex-start;
   align-items: center;
