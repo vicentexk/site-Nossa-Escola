@@ -1,41 +1,30 @@
-// script.js - explicação detalhada abaixo (carrossel, eventos, busca, login, tema, topo, fade-in)
+// script.js - versão limpa e organizada
 
 /* ------------------ Fade-in inicial ------------------ */
-// 1️⃣ Seleciona o body da página
 const body = document.querySelector('body');
-
-// 2️⃣ Adiciona a classe 'fade-ready' quando a página carregar
 window.addEventListener('load', () => {
-  // Aqui estamos esperando a página carregar totalmente
   body.classList.add('fade-ready');
 });
 
-
 /* ------------------ CARROSSEL (crossfade) ------------------ */
-// lista de imagens (coloque os nomes que existem na sua pasta)
 const imagens = [
   "paragrafo_1_banner.jpg",
   "banner_evento.jpg",
   "banner_escola2.jpg"
 ];
-
-// elemento <img> dentro da .banner1 (já existe no seu HTML)
 const bannerImg = document.querySelector(".banner1 img");
 let idx = 0;
 let intervalo = null;
-const TEMPO = 3500; // ms
+const TEMPO = 3500;
 
 function trocaImagem() {
   if (!bannerImg) return;
-  // adiciona classe que reduz opacidade
   bannerImg.classList.add("fading");
-  // quando terminar a transição CSS (opacity), trocamos a src
   function aoTerminar() {
     bannerImg.removeEventListener("transitionend", aoTerminar);
     idx = (idx + 1) % imagens.length;
     bannerImg.src = imagens[idx];
-    // força um reflow pra garantir que a remoção da classe fará o fade-in
-    void bannerImg.offsetWidth;
+    void bannerImg.offsetWidth; // força reflow
     bannerImg.classList.remove("fading");
   }
   bannerImg.addEventListener("transitionend", aoTerminar);
@@ -45,10 +34,9 @@ function iniciaCarrossel() {
   if (intervalo) clearInterval(intervalo);
   intervalo = setInterval(trocaImagem, TEMPO);
 }
+
 if (bannerImg) {
-  // inicia autoplay
   iniciaCarrossel();
-  // pausa ao passar o mouse
   bannerImg.addEventListener("mouseenter", () => clearInterval(intervalo));
   bannerImg.addEventListener("mouseleave", iniciaCarrossel);
 }
@@ -69,48 +57,74 @@ function montaEventos() {
     <ul class="lista-eventos">
       ${proximos.map(ev => `<li><strong>${ev.data}</strong> — ${ev.titulo}</li>`).join("")}
     </ul>`;
-  // inserir antes do footer
   const footer = document.querySelector("footer");
   footer.parentNode.insertBefore(sec, footer);
 }
 montaEventos();
 
-/* ------------------ BUSCA INTERNA (filtra .estudante-div) ------------------ */
-// cria input e adiciona no header
-const header = document.querySelector("header");
-const busca = document.createElement("input");
-busca.type = "search";
-busca.placeholder = "🔎 Buscar aluno por nome...";
-busca.className = "busca-animada";
-if (header) header.appendChild(busca);
+/* ------------------ BUSCA INTERNA COM RESULTADOS ------------------ */
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  if (!header) return;
 
-// evento que filtra conforme o usuário digita
-busca.addEventListener("input", () => {
-  const termo = busca.value.trim().toLowerCase();
-  const cards = document.querySelectorAll(".estudante-div");
-  cards.forEach(card => {
-    const nomeEl = card.querySelector(".estudante-nome");
-    const nome = nomeEl ? nomeEl.textContent.toLowerCase() : "";
-    if (!termo || nome.includes(termo)) {
-      // mostrar com animação suave (garantir display)
-      card.style.display = "";
-      card.classList.remove("diminuindo");
+  // Cria input da busca
+  const busca = document.createElement("input");
+  busca.type = "search";
+  busca.placeholder = "🔎 Buscar aluno por nome...";
+  busca.className = "busca-animada";
+  header.appendChild(busca);
+
+  // Cria div que vai mostrar os resultados
+  const resultadosDiv = document.createElement("div");
+  resultadosDiv.className = "resultados-busca";
+  header.appendChild(resultadosDiv);
+
+  // Evento de filtragem
+  busca.addEventListener("input", () => {
+    const termo = busca.value.trim().toLowerCase();
+    const cards = document.querySelectorAll(".estudante-div");
+    resultadosDiv.innerHTML = "";
+
+    if (termo) {
+      const encontrados = [...cards].filter(card => {
+        const nomeEl = card.querySelector(".estudante-nome");
+        return nomeEl && nomeEl.textContent.toLowerCase().includes(termo);
+      });
+
+      encontrados.forEach(card => {
+        const nomeEl = card.querySelector(".estudante-nome");
+        const imgEl = card.querySelector(".estudante-imagem");
+
+        const item = document.createElement("div");
+        item.className = "resultado-item";
+        item.innerHTML = `
+          <img src="${imgEl ? imgEl.src : ''}" alt="${nomeEl.textContent}">
+          <span>${nomeEl.textContent}</span>
+        `;
+
+        item.addEventListener("click", () => {
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+          resultadosDiv.style.display = "none";
+          busca.value = "";
+        });
+
+        resultadosDiv.appendChild(item);
+      });
+
+      resultadosDiv.style.display = encontrados.length ? "block" : "none";
     } else {
-      // adicionar classe de "desaparecer" e depois esconder
-      card.classList.add("diminuindo");
-      setTimeout(() => { card.style.display = "none"; }, 280);
+      resultadosDiv.style.display = "none";
     }
   });
 });
 
 /* ------------------ LOGIN SIMPLES (modal) ------------------ */
-// botão abrir login no header
 const btnLogin = document.createElement("button");
 btnLogin.className = "abrir-login";
 btnLogin.textContent = "Área Restrita";
+const header = document.querySelector("header");
 if (header) header.appendChild(btnLogin);
 
-// HTML do modal
 const modalHTML = `
   <div class="modal-overlay" id="modalLogin" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true">
@@ -149,7 +163,6 @@ btnLogin.addEventListener("click", abrirModal);
 btnFechar.addEventListener("click", fecharModal);
 overlay.addEventListener("click", (e) => { if (e.target === overlay) fecharModal(); });
 
-// verificação simples (EXEMPLO) - não seguro para produção
 btnConfirm.addEventListener("click", () => {
   const u = document.getElementById("loginUser").value.trim();
   const p = document.getElementById("loginPass").value.trim();
@@ -176,7 +189,6 @@ btnTema.addEventListener("click", () => {
   localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
   atualizaTextoTema();
 });
-// aplicar tema salvo (persistência)
 if (localStorage.getItem("tema") === "dark") document.body.classList.add("dark");
 atualizaTextoTema();
 
@@ -191,56 +203,4 @@ window.addEventListener("scroll", () => {
   else btnTopo.classList.remove("mostra");
 });
 
-// smooth scroll pro topo
 btnTopo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector("header");
-  const busca = document.createElement("input");
-  busca.type = "search";
-  busca.placeholder = "🔎 Buscar aluno por nome...";
-  busca.className = "busca-animada";
-  if (header) header.appendChild(busca);
-
-  // cria div que vai mostrar os resultados
-  const resultadosDiv = document.createElement("div");
-  resultadosDiv.className = "resultados-busca";
-  header.appendChild(resultadosDiv);
-
-  busca.addEventListener("input", () => {
-    const termo = busca.value.trim().toLowerCase();
-    const cards = document.querySelectorAll(".estudante-div");
-    resultadosDiv.innerHTML = "";
-
-    if (termo) {
-      const encontrados = [...cards].filter(card => {
-        const nomeEl = card.querySelector(".estudante-nome");
-        return nomeEl && nomeEl.textContent.toLowerCase().includes(termo);
-      });
-
-      encontrados.forEach(card => {
-        const nomeEl = card.querySelector(".estudante-nome");
-        const imgEl = card.querySelector(".estudante-imagem");
-
-        const item = document.createElement("div");
-        item.className = "resultado-item";
-        item.innerHTML = `
-          <img src="${imgEl ? imgEl.src : ''}" alt="${nomeEl.textContent}">
-          <span>${nomeEl.textContent}</span>
-        `;
-
-        item.addEventListener("click", () => {
-          card.scrollIntoView({ behavior: "smooth", block: "center" });
-          resultadosDiv.style.display = "none";
-          busca.value = "";
-        });
-
-        resultadosDiv.appendChild(item);
-      });
-
-      resultadosDiv.style.display = encontrados.length ? "block" : "none";
-    } else {
-      resultadosDiv.style.display = "none";
-    }
-  });
-});
