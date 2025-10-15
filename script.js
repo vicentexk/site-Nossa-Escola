@@ -1,4 +1,4 @@
-// script.js - versão limpa e organizada
+// script.js - versão limpa, organizada e com login funcional
 
 /* ------------------ Fade-in inicial ------------------ */
 const body = document.querySelector('body');
@@ -118,13 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ------------------ LOGIN SIMPLES (modal) ------------------ */
+/* ------------------ LOGIN SIMPLES / CRIAR CONTA ------------------ */
 const btnLogin = document.createElement("button");
 btnLogin.className = "abrir-login";
 btnLogin.textContent = "Área Restrita";
 const header = document.querySelector("header");
 if (header) header.appendChild(btnLogin);
 
+// Modal HTML
 const modalHTML = `
   <div class="modal-overlay" id="modalLogin" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true">
@@ -132,8 +133,9 @@ const modalHTML = `
       <h3>Login - Professores</h3>
       <input id="loginUser" placeholder="Usuário">
       <input id="loginPass" placeholder="Senha" type="password">
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
+      <div style="display:flex;gap:8px;margin-top:6px;">
         <button id="btnLoginConfirm">Entrar</button>
+        <button id="btnCriarConta">Criar Conta</button>
       </div>
       <p class="modal-msg" id="modalMsg"></p>
     </div>
@@ -144,6 +146,7 @@ document.body.insertAdjacentHTML("beforeend", modalHTML);
 const overlay = document.getElementById("modalLogin");
 const btnFechar = overlay.querySelector(".modal-fechar");
 const btnConfirm = document.getElementById("btnLoginConfirm");
+const btnCriarConta = document.getElementById("btnCriarConta");
 const msg = document.getElementById("modalMsg");
 
 function abrirModal() {
@@ -163,18 +166,60 @@ btnLogin.addEventListener("click", abrirModal);
 btnFechar.addEventListener("click", fecharModal);
 overlay.addEventListener("click", (e) => { if (e.target === overlay) fecharModal(); });
 
+// Verifica se já está logado
+if (localStorage.getItem("logado") === "true") loginSucesso();
+
+// Login
 btnConfirm.addEventListener("click", () => {
   const u = document.getElementById("loginUser").value.trim();
   const p = document.getElementById("loginPass").value.trim();
-  if (u === "professor" && p === "1234") {
-    msg.textContent = "Login ok. (Exemplo)";
-    msg.className = "modal-msg sucesso";
-    setTimeout(() => { fecharModal(); alert("Acesso concedido (exemplo)."); }, 600);
+  const contas = JSON.parse(localStorage.getItem("contas") || "{}");
+
+  if (contas[u] && contas[u] === p) {
+    localStorage.setItem("logado", "true");
+    loginSucesso();
+    fecharModal();
   } else {
     msg.textContent = "Usuário/senha incorretos.";
     msg.className = "modal-msg erro";
   }
 });
+
+// Criar conta
+btnCriarConta.addEventListener("click", () => {
+  const u = document.getElementById("loginUser").value.trim();
+  const p = document.getElementById("loginPass").value.trim();
+  if (!u || !p) {
+    msg.textContent = "Preencha usuário e senha!";
+    msg.className = "modal-msg erro";
+    return;
+  }
+  const contas = JSON.parse(localStorage.getItem("contas") || "{}");
+  if (contas[u]) {
+    msg.textContent = "Usuário já existe!";
+    msg.className = "modal-msg erro";
+    return;
+  }
+  contas[u] = p;
+  localStorage.setItem("contas", JSON.stringify(contas));
+  msg.textContent = "Conta criada com sucesso!";
+  msg.className = "modal-msg sucesso";
+});
+
+// Função de login bem-sucedido
+function loginSucesso() {
+  btnLogin.textContent = "Sair";
+  btnLogin.classList.add("logado");
+  alert("Bem-vindo à área restrita!");
+  
+  btnLogin.onclick = () => {
+    localStorage.removeItem("logado");
+    btnLogin.textContent = "Área Restrita";
+    btnLogin.classList.remove("logado");
+    alert("Você saiu da área restrita!");
+    btnLogin.onclick = abrirModal;
+  };
+}
 
 /* ------------------ MODO ESCURO / CLARO (persistente) ------------------ */
 const btnTema = document.createElement("button");
