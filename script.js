@@ -43,8 +43,8 @@ if (bannerImg) {
 
 /* ------------------ CALENDÁRIO / EVENTOS ------------------ */
 const eventos = [
-  { data: "2025-10-20", titulo: "Feira de Ciências" },
-  { data: "2025-11-05", titulo: "Semana Cultural" },
+  { data: "2025-10-20", titulo: "Festival da vida" },
+  { data: "2025-11-05", titulo: "Feira de Profissões" },
   { data: "2025-12-15", titulo: "Encerramento do Ano Letivo" }
 ];
 
