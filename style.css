@@ -193,7 +193,47 @@ header .busca-animada:focus {
 .lista-eventos li {
   margin: 6px 0;
 }
+/* ===== Resultados da busca ===== */
+.resultados-busca {
+  position: absolute;
+  top: 65px; /* fica logo abaixo do header */
+  left: 20px;
+  width: 280px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  z-index: 50;
+  display: none;
+  overflow: hidden;
+  max-height: 260px;
+  overflow-y: auto;
+}
 
+.resultado-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.resultado-item:hover {
+  background-color: #f5f5f5;
+}
+
+.resultado-item img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.resultado-item span {
+  font-size: 0.95rem;
+  color: #333;
+}
 /* ===== Botões tema e login ===== */
 header .botao-tema,
 header .abrir-login {
