@@ -120,7 +120,7 @@ header {
 }
 
 .estudante {
-  background-color: #2df788;
+  background-color: #354974;
   padding: 24px 0;
   text-align: center;
 }
@@ -316,6 +316,7 @@ body.dark {
   --bg: #0f1720;
   --fg: #e6eef8;
   --card: #111827;
+  background-color: #12161b;
 }
 
 body { background-color: var(--bg); color: var(--fg); }
