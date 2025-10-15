@@ -194,3 +194,53 @@ window.addEventListener("scroll", () => {
 // smooth scroll pro topo
 btnTopo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  const busca = document.createElement("input");
+  busca.type = "search";
+  busca.placeholder = "🔎 Buscar aluno por nome...";
+  busca.className = "busca-animada";
+  if (header) header.appendChild(busca);
+
+  // cria div que vai mostrar os resultados
+  const resultadosDiv = document.createElement("div");
+  resultadosDiv.className = "resultados-busca";
+  header.appendChild(resultadosDiv);
+
+  busca.addEventListener("input", () => {
+    const termo = busca.value.trim().toLowerCase();
+    const cards = document.querySelectorAll(".estudante-div");
+    resultadosDiv.innerHTML = "";
+
+    if (termo) {
+      const encontrados = [...cards].filter(card => {
+        const nomeEl = card.querySelector(".estudante-nome");
+        return nomeEl && nomeEl.textContent.toLowerCase().includes(termo);
+      });
+
+      encontrados.forEach(card => {
+        const nomeEl = card.querySelector(".estudante-nome");
+        const imgEl = card.querySelector(".estudante-imagem");
+
+        const item = document.createElement("div");
+        item.className = "resultado-item";
+        item.innerHTML = `
+          <img src="${imgEl ? imgEl.src : ''}" alt="${nomeEl.textContent}">
+          <span>${nomeEl.textContent}</span>
+        `;
+
+        item.addEventListener("click", () => {
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+          resultadosDiv.style.display = "none";
+          busca.value = "";
+        });
+
+        resultadosDiv.appendChild(item);
+      });
+
+      resultadosDiv.style.display = encontrados.length ? "block" : "none";
+    } else {
+      resultadosDiv.style.display = "none";
+    }
+  });
+});

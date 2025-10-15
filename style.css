@@ -163,7 +163,7 @@ header {
 /* ===== Barra de busca animada ===== */
 header .busca-animada {
   margin-left: 12px;
-  padding: 6px 10px;
+  padding: 10px 22px;
   border-radius: 8px;
   border: 1px solid #ddd;
   outline: none;
@@ -238,7 +238,7 @@ header .busca-animada:focus {
 header .botao-tema,
 header .abrir-login {
   margin-left: 8px;
-  padding: 6px 10px;
+  padding: 10px 22px;
   border-radius: 8px;
   background: transparent;
   border: 1px solid #ccc;
