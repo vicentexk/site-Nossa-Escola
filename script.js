@@ -1,12 +1,10 @@
-// script.js - versão limpa, organizada e com login funcional
-
-/* ------------------ Fade-in inicial ------------------ */
+/* ------------------ FADE-IN INICIAL ------------------ */
 const body = document.querySelector('body');
 window.addEventListener('load', () => {
   body.classList.add('fade-ready');
 });
 
-/* ------------------ CARROSSEL (crossfade) ------------------ */
+/* ------------------ CARROSSEL (CROSSFADE) ------------------ */
 const imagens = [
   "paragrafo_1_banner.jpg",
   "banner_evento.jpg",
@@ -43,8 +41,8 @@ if (bannerImg) {
 
 /* ------------------ CALENDÁRIO / EVENTOS ------------------ */
 const eventos = [
-  { data: "2025-10-20", titulo: "Festival da vida" },
-  { data: "2025-11-05", titulo: "Feira de Profissões" },
+  { data: "2025-10-20", titulo: "Feira de Ciências" },
+  { data: "2025-11-05", titulo: "Semana Cultural" },
   { data: "2025-12-15", titulo: "Encerramento do Ano Letivo" }
 ];
 
@@ -67,19 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
   if (!header) return;
 
-  // Cria input da busca
+  // Input da busca
   const busca = document.createElement("input");
   busca.type = "search";
   busca.placeholder = "🔎 Buscar aluno por nome...";
   busca.className = "busca-animada";
   header.appendChild(busca);
 
-  // Cria div que vai mostrar os resultados
+  // Div resultados
   const resultadosDiv = document.createElement("div");
   resultadosDiv.className = "resultados-busca";
   header.appendChild(resultadosDiv);
 
-  // Evento de filtragem
   busca.addEventListener("input", () => {
     const termo = busca.value.trim().toLowerCase();
     const cards = document.querySelectorAll(".estudante-div");
@@ -118,22 +115,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ------------------ LOGIN SIMPLES / CRIAR CONTA ------------------ */
+/* ------------------ LOGIN / CRIAR CONTA ------------------ */
 const btnLogin = document.createElement("button");
 btnLogin.className = "abrir-login";
 btnLogin.textContent = "Área Restrita";
 const header = document.querySelector("header");
 if (header) header.appendChild(btnLogin);
 
-// Modal HTML
 const modalHTML = `
   <div class="modal-overlay" id="modalLogin" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true">
       <button class="modal-fechar" aria-label="Fechar">✕</button>
-      <h3>Login - Professores</h3>
+      <h3>Área Restrita - Professores</h3>
       <input id="loginUser" placeholder="Usuário">
       <input id="loginPass" placeholder="Senha" type="password">
-      <div style="display:flex;gap:8px;margin-top:6px;">
+      <div style="display:flex;gap:8px;margin-top:6px;justify-content:flex-end;">
         <button id="btnLoginConfirm">Entrar</button>
         <button id="btnCriarConta">Criar Conta</button>
       </div>
@@ -149,6 +145,7 @@ const btnConfirm = document.getElementById("btnLoginConfirm");
 const btnCriarConta = document.getElementById("btnCriarConta");
 const msg = document.getElementById("modalMsg");
 
+// Funções abrir/fechar modal
 function abrirModal() {
   overlay.classList.add("ativo");
   overlay.setAttribute("aria-hidden", "false");
@@ -166,7 +163,7 @@ btnLogin.addEventListener("click", abrirModal);
 btnFechar.addEventListener("click", fecharModal);
 overlay.addEventListener("click", (e) => { if (e.target === overlay) fecharModal(); });
 
-// Verifica se já está logado
+// Login persistente
 if (localStorage.getItem("logado") === "true") loginSucesso();
 
 // Login
@@ -206,12 +203,10 @@ btnCriarConta.addEventListener("click", () => {
   msg.className = "modal-msg sucesso";
 });
 
-// Função de login bem-sucedido
+// Login bem-sucedido
 function loginSucesso() {
   btnLogin.textContent = "Sair";
   btnLogin.classList.add("logado");
-  alert("Bem-vindo à área restrita!");
-  
   btnLogin.onclick = () => {
     localStorage.removeItem("logado");
     btnLogin.textContent = "Área Restrita";
@@ -221,7 +216,7 @@ function loginSucesso() {
   };
 }
 
-/* ------------------ MODO ESCURO / CLARO (persistente) ------------------ */
+/* ------------------ MODO ESCURO / CLARO ------------------ */
 const btnTema = document.createElement("button");
 btnTema.className = "botao-tema";
 if (header) header.appendChild(btnTema);
