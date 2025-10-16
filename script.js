@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
 /* ------------------ CARROSSEL (CROSSFADE) ------------------ */
 const imagens = [
   "paragrafo_1_banner.jpg",
-  "banner_evento.jpg",
+  "banner_evento.png",
   "banner_escola2.jpg"
 ];
 const bannerImg = document.querySelector(".banner1 img");
