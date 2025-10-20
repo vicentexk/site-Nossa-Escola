@@ -1,390 +1,19 @@
-/* ===== Reset básico ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-
-  /* Fade-in inicial */
-  opacity: 0;
-  transform: translateY(6px);
-
-  /* Todas as transições juntas */
-  transition: 
-    opacity 600ms ease,
-    transform 600ms ease,
-    background-color 300ms ease,
-    color 300ms ease;
-}
-
-/* Quando a página estiver pronta, ativar fade-in */
-body.fade-ready {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== Header ===== */
-header {
-  background-color: #424e61;
-  color: white;
-  width: 100%;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.cabecalho-itens {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.cabecalho-imagem img {
-  width: 60px; /* tamanho ajustado para o logo */
-  height: auto;
-}
-
-.titulo_site {
-  padding: 0;
-  text-align: center;
-  font-size: 26px;
-  font-weight: 600;
-}
-
-.sociais {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-}
-
-.sociais img {
-  width: 36px; /* tamanho fixo dos ícones */
-  height: 36px;
-  transition: transform 0.25s ease;
-}
-
-.sociais img:hover {
-  transform: scale(1.1);
-}
-
-/* ===== Banner ===== */
-.banner1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  background-color: #424e61;
-}
-
-.banner1 img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-  transition: opacity 600ms ease;
-  opacity: 1;
-}
-
-.banner1 img.fading {
-  opacity: 0;
-}
-
-/* ===== Seções estudantes ===== */
-.estudante_titulo {
-  padding: 40px 20px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.estudante-nome {
-  text-align: center;
-}
-
-.estudante-imagem {
-  width: 120px;
-  border-radius: 8px;
-}
-
-.estudante-icone {
-  width: 38px;
-  padding: 4px 8px;
-}
-
-.estudante {
-  background-color: #354974;
-  padding: 24px 0;
-  text-align: center;
-}
-
-.estudante-div {
-  text-align: center;
-  padding: 24px 0;
-}
-
-.estudantes_todos {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-/* ===== Footer ===== */
-.escola {
-  background-image: linear-gradient(#40A2E3, #1b445f);
-  color: white;
-  padding: 24px 0;
-  text-align: center;
-}
-
-.escola-titulo {
-  padding: 20px;
-  text-align: center;
-}
-
-.logo_rodape {
-  height: 70px;
-  padding: 12px 0;
-}
-
-.link {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* ===== Barra de busca animada ===== */
-header .busca-animada {
-  margin-left: 12px;
-  padding: 10px 22px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  outline: none;
-  transition: box-shadow 200ms ease, transform 200ms ease;
-}
-
-header .busca-animada:focus {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
-}
-
-/* ===== Eventos ===== */
-.eventos-wrapper {
-  max-width: 1000px;
-  margin: 24px auto;
-  padding: 14px;
-  border-radius: 10px;
-  background: #fafafa;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.03);
-  transition: transform 300ms ease, opacity 300ms ease;
-}
-
-.eventos-wrapper h2 {
-  margin: 0 0 10px 0;
-}
-
-.lista-eventos li {
-  margin: 6px 0;
-}
-/* ===== Resultados da busca ===== */
-.resultados-busca {
-  position: absolute;
-  top: 65px; /* fica logo abaixo do header */
-  left: 20px;
-  width: 280px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  z-index: 50;
-  display: none;
-  overflow: hidden;
-  max-height: 260px;
-  overflow-y: auto;
-}
-
-.resultado-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-}
-
-.resultado-item:hover {
-  background-color: #f5f5f5;
-}
-
-.resultado-item img {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.resultado-item span {
-  font-size: 0.95rem;
-  color: #333;
-}
-/* ===== Botões tema e login ===== */
-header .botao-tema,
-header .abrir-login {
-  margin-left: 8px;
-  padding: 10px 22px;
-  border-radius: 8px;
-  background: transparent;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  transition: background-color 200ms ease, transform 120ms ease;
-}
-
-header .botao-tema:hover,
-header .abrir-login:hover {
-  transform: translateY(-2px);
-}
-
-/* ===== Modal de login ===== */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(10,10,10,0.45);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 220ms ease;
-  z-index: 80;
-}
-
-.modal-overlay.ativo {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-card {
-  width: 320px;
-  max-width: calc(100% - 40px);
-  background: #fff;
-  padding: 18px;
-  border-radius: 10px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-  transform: translateY(8px);
-  transition: transform 220ms ease;
-}
-
-.modal-overlay.ativo .modal-card {
-  transform: translateY(0);
-}
-
-.modal-card input {
-  width: 100%;
-  padding: 8px 10px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-}
-
-/* Mensagens no modal */
-.modal-msg {
-  margin-top: 6px;
-  font-size: 0.95rem;
-}
-
-.modal-msg.erro { color: #b00020; }
-.modal-msg.sucesso { color: #007a2f; }
-
-.modal-fechar {
-  position: absolute;
-  right: 12px;
-  top: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-/* ===== Back to top ===== */
-button.topo {
-  position: fixed;
-  right: 20px;
-  bottom: 22px;
-  padding: 12px 14px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #0b5ed7, #3aa0ff);
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  transform: translateY(8px);
-  opacity: 1;
-  transition: transform 220ms ease, opacity 220ms ease, background 200ms ease, box-shadow 200ms ease;
-  z-index: 90;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4);
-  }
-  70% {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0);
-  }
-  100% {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0);
-  }
-}
-
-/* ===== Tema escuro ===== */
-:root {
-  --bg: #ffffff;
-  --fg: #222222;
-  --card: #fafafa;
-}
-
-body.dark {
-  --bg: #0f1720;
-  --fg: #e6eef8;
-  --card: #111827;
-  background-color: #12161b;
-}
-
-body { background-color: var(--bg); color: var(--fg); }
-.eventos-wrapper { background: var(--card); }
-
-/* ===== Pequenas responsividades ===== */
-@media (max-width:700px) {
-  .banner1 { max-height: 240px; }
-  header .busca-animada { display: none; }
-  .titulo_site { font-size: 20px; }
-  .sociais img { width: 30px; height: 30px; }
-}
 /* ===== Variáveis Globais ===== */
 :root {
   /* Cores Tema Claro */
-  --bg: #ffffff;           /* fundo da página */
-  --fg: #222222;           /* texto principal */
+  --bg: #ffffff;          /* fundo da página */
+  --fg: #222222;          /* texto principal */
   --header-bg: #424e61;    /* fundo do header */
-  --header-fg: #ffffff;    /* texto do header */
+  --header-fg: #ffffff;     /* texto do header */
   --card-bg: #fafafa;      /* fundo de cartões/seções */
   --banner-bg: #424e61;    /* fundo do banner */
   --botao-bg: transparent; /* fundo dos botões */
-  --botao-border: #ccc;    /* borda dos botões */
-  --modal-bg: #ffffff;     /* fundo do modal */
+  --botao-border: #ccc;     /* borda dos botões */
+  --modal-bg: #ffffff;      /* fundo do modal */
   --resultado-bg: #ffffff; /* fundo resultados da busca */
   --resultado-fg: #333333; /* texto resultados */
   --footer-bg: linear-gradient(#40A2E3, #1b445f); /* fundo do footer */
-  --footer-fg: #ffffff;    /* texto footer */
+  --footer-fg: #ffffff;     /* texto footer */
 }
 
 /* ===== Tema Escuro ===== */
@@ -423,6 +52,13 @@ body.fade-ready {
   transform: translateY(0);
 }
 
+/* ===== Reset básico (movido para cá) ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* ===== Header ===== */
 header {
   background-color: var(--header-bg);
@@ -433,6 +69,41 @@ header {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.cabecalho-itens {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cabecalho-imagem img {
+  width: 60px;
+  height: auto;
+}
+
+.titulo_site {
+  padding: 0;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.sociais {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.sociais img {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.25s ease;
+}
+
+.sociais img:hover {
+  transform: scale(1.1);
 }
 
 header .busca-animada {
@@ -494,6 +165,13 @@ header .abrir-login:hover {
 }
 
 /* ===== Seções estudantes ===== */
+.estudante_titulo {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
 .estudante {
   background-color: var(--card-bg);
   padding: 24px 0;
@@ -520,6 +198,13 @@ header .abrir-login:hover {
   padding: 4px 8px;
 }
 
+.estudantes_todos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 /* ===== Eventos ===== */
 .eventos-wrapper {
   max-width: 1000px;
@@ -533,6 +218,10 @@ header .abrir-login:hover {
 
 .eventos-wrapper h2 {
   margin: 0 0 10px 0;
+}
+
+.lista-eventos li {
+  margin: 6px 0;
 }
 
 /* ===== Resultados da busca ===== */
@@ -588,7 +277,10 @@ header .abrir-login:hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease;
-  z-index: 80;
+  /* CORRIGIDO: z-index aumentado para 100 
+    para ficar sobre o botão "Topo" (que tem 90)
+  */
+  z-index: 100; 
 }
 
 .modal-overlay.ativo {
@@ -605,6 +297,7 @@ header .abrir-login:hover {
   box-shadow: 0 18px 40px rgba(0,0,0,0.12);
   transform: translateY(8px);
   transition: transform 220ms ease, background-color 220ms ease;
+  position: relative; /* Adicionado para o botão fechar */
 }
 
 .modal-card input {
@@ -618,6 +311,10 @@ header .abrir-login:hover {
 }
 
 /* Mensagens do modal */
+.modal-msg {
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
 .modal-msg.erro { color: #b00020; }
 .modal-msg.sucesso { color: #007a2f; }
 
@@ -637,6 +334,11 @@ header .abrir-login:hover {
   background: var(--footer-bg);
   color: var(--footer-fg);
   padding: 24px 0;
+  text-align: center;
+}
+
+.escola-titulo {
+  padding: 20px;
   text-align: center;
 }
 
@@ -671,6 +373,12 @@ button.topo {
   animation: pulse 2s infinite;
 }
 
+/* Classe 'mostra' para o botão topo */
+button.topo.mostra {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @keyframes pulse {
   0% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4); }
   70% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0); }
@@ -684,18 +392,8 @@ button.topo {
   .titulo_site { font-size: 20px; }
   .sociais img { width: 30px; height: 30px; }
 }
-/* Forçar modal por cima de tudo */
-.modal-overlay {
-    position: fixed !important; /* fixa na tela */
-    inset: 0 !important;        /* ocupa toda a tela */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: rgba(0,0,0,0.5) !important;
-    z-index: 9999 !important;   /* garante que fique acima de tudo */
-}
 
-.modal-card {
-    position: relative !important;
-    z-index: 10000 !important;
-}
+/* REMOVIDO: O bloco de CSS com !important
+  foi removido pois o z-index do modal
+  foi corrigido acima.
+*/

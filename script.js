@@ -244,19 +244,12 @@ window.addEventListener("scroll", () => {
 });
 
 btnTopo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+/*
+  REMOVIDO: O bloco de código abaixo foi removido pois
+  referenciava o modal estático ('#area-restrita-modal')
+  que foi apagado do HTML.
+*/
 // === CORREÇÃO: controle da janela da Área Restrita ===
-const botaoAreaRestrita = document.getElementById('botao-area-restrita');
-const modal = document.getElementById('area-restrita-modal');
-const fundo = document.getElementById('area-restrita-fundo');
-
-if (botaoAreaRestrita && modal && fundo) {
-  botaoAreaRestrita.addEventListener('click', () => {
-    modal.style.display = 'block';
-    fundo.style.display = 'block';
-  });
-
-  fundo.addEventListener('click', () => {
-    modal.style.display = 'none';
-    fundo.style.display = 'none';
-  });
-}
+// const botaoAreaRestrita = document.getElementById('botao-area-restrita');
+// ... (código removido)
