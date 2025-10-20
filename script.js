@@ -244,3 +244,19 @@ window.addEventListener("scroll", () => {
 });
 
 btnTopo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+// === CORREÇÃO: controle da janela da Área Restrita ===
+const botaoAreaRestrita = document.getElementById('botao-area-restrita');
+const modal = document.getElementById('area-restrita-modal');
+const fundo = document.getElementById('area-restrita-fundo');
+
+if (botaoAreaRestrita && modal && fundo) {
+  botaoAreaRestrita.addEventListener('click', () => {
+    modal.style.display = 'block';
+    fundo.style.display = 'block';
+  });
+
+  fundo.addEventListener('click', () => {
+    modal.style.display = 'none';
+    fundo.style.display = 'none';
+  });
+}
