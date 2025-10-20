@@ -684,27 +684,18 @@ button.topo {
   .titulo_site { font-size: 20px; }
   .sociais img { width: 30px; height: 30px; }
 }
-/* === CORREÇÃO: janela da Área Restrita centralizada === */
-#area-restrita-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  display: none;
+/* Forçar modal por cima de tudo */
+.modal-overlay {
+    position: fixed !important; /* fixa na tela */
+    inset: 0 !important;        /* ocupa toda a tela */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(0,0,0,0.5) !important;
+    z-index: 9999 !important;   /* garante que fique acima de tudo */
 }
 
-#area-restrita-fundo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 9998;
-  display: none;
+.modal-card {
+    position: relative !important;
+    z-index: 10000 !important;
 }

@@ -1,10 +1,10 @@
-/* ------------------ FADE-IN INICIAL ------------------ */
+/* ================== FADE-IN INICIAL ================== */
 const body = document.querySelector('body');
 window.addEventListener('load', () => {
   body.classList.add('fade-ready');
 });
 
-/* ------------------ CARROSSEL (CROSSFADE) ------------------ */
+/* ================== CARROSSEL (CROSSFADE) ================== */
 const imagens = [
   "paragrafo_1_banner.jpg",
   "banner_evento.png",
@@ -39,7 +39,7 @@ if (bannerImg) {
   bannerImg.addEventListener("mouseleave", iniciaCarrossel);
 }
 
-/* ------------------ CALENDÁRIO / EVENTOS ------------------ */
+/* ================== CALENDÁRIO / EVENTOS ================== */
 const eventos = [
   { data: "2025-10-20", titulo: "Feira de Ciências" },
   { data: "2025-11-05", titulo: "Semana Cultural" },
@@ -60,19 +60,17 @@ function montaEventos() {
 }
 montaEventos();
 
-/* ------------------ BUSCA INTERNA COM RESULTADOS ------------------ */
+/* ================== BUSCA INTERNA COM RESULTADOS ================== */
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
   if (!header) return;
 
-  // Input da busca
   const busca = document.createElement("input");
   busca.type = "search";
   busca.placeholder = "🔎 Buscar aluno por nome...";
   busca.className = "busca-animada";
   header.appendChild(busca);
 
-  // Div resultados
   const resultadosDiv = document.createElement("div");
   resultadosDiv.className = "resultados-busca";
   header.appendChild(resultadosDiv);
@@ -115,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ------------------ LOGIN / CRIAR CONTA ------------------ */
+/* ================== LOGIN / CRIAR CONTA ================== */
 const btnLogin = document.createElement("button");
 btnLogin.className = "abrir-login";
 btnLogin.textContent = "Área Restrita";
@@ -145,12 +143,15 @@ const btnConfirm = document.getElementById("btnLoginConfirm");
 const btnCriarConta = document.getElementById("btnCriarConta");
 const msg = document.getElementById("modalMsg");
 
-// Funções abrir/fechar modal
+// Abrir modal
 function abrirModal() {
   overlay.classList.add("ativo");
   overlay.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = "hidden"; // trava scroll
+  overlay.scrollIntoView({behavior: "smooth", block: "center"}); // centraliza modal
 }
+
+// Fechar modal
 function fecharModal() {
   overlay.classList.remove("ativo");
   overlay.setAttribute("aria-hidden", "true");
@@ -159,6 +160,8 @@ function fecharModal() {
   document.getElementById("loginUser").value = "";
   document.getElementById("loginPass").value = "";
 }
+
+// Eventos modal
 btnLogin.addEventListener("click", abrirModal);
 btnFechar.addEventListener("click", fecharModal);
 overlay.addEventListener("click", (e) => { if (e.target === overlay) fecharModal(); });
@@ -216,7 +219,7 @@ function loginSucesso() {
   };
 }
 
-/* ------------------ MODO ESCURO / CLARO ------------------ */
+/* ================== MODO ESCURO / CLARO ================== */
 const btnTema = document.createElement("button");
 btnTema.className = "botao-tema";
 if (header) header.appendChild(btnTema);
@@ -224,15 +227,17 @@ if (header) header.appendChild(btnTema);
 function atualizaTextoTema() {
   btnTema.textContent = document.body.classList.contains("dark") ? "☀️ Modo Claro" : "🌙 Modo Escuro";
 }
+
 btnTema.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
   atualizaTextoTema();
 });
+
 if (localStorage.getItem("tema") === "dark") document.body.classList.add("dark");
 atualizaTextoTema();
 
-/* ------------------ BOTÃO VOLTAR AO TOPO ------------------ */
+/* ================== BOTÃO VOLTAR AO TOPO ================== */
 const btnTopo = document.createElement("button");
 btnTopo.className = "topo";
 btnTopo.textContent = "⬆ Topo";
@@ -244,19 +249,3 @@ window.addEventListener("scroll", () => {
 });
 
 btnTopo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-// === CORREÇÃO: controle da janela da Área Restrita ===
-const botaoAreaRestrita = document.getElementById('botao-area-restrita');
-const modal = document.getElementById('area-restrita-modal');
-const fundo = document.getElementById('area-restrita-fundo');
-
-if (botaoAreaRestrita && modal && fundo) {
-  botaoAreaRestrita.addEventListener('click', () => {
-    modal.style.display = 'block';
-    fundo.style.display = 'block';
-  });
-
-  fundo.addEventListener('click', () => {
-    modal.style.display = 'none';
-    fundo.style.display = 'none';
-  });
-}
