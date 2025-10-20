@@ -7,8 +7,8 @@ window.addEventListener('load', () => {
 /* ------------------ CARROSSEL (CROSSFADE) ------------------ */
 const imagens = [
   "paragrafo_1_banner.jpg",
-  "banner 2026.jpeg",
-  "banner zoado 2026.jpeg"
+  "banner_evento.png",
+  "banner_escola2.jpg"
 ];
 const bannerImg = document.querySelector(".banner1 img");
 let idx = 0;
@@ -18,6 +18,7 @@ const TEMPO = 3500;
 function trocaImagem() {
   if (!bannerImg) return;
   bannerImg.classList.add("fading");
+
   function aoTerminar() {
     bannerImg.removeEventListener("transitionend", aoTerminar);
     idx = (idx + 1) % imagens.length;
@@ -25,6 +26,7 @@ function trocaImagem() {
     void bannerImg.offsetWidth; // força reflow
     bannerImg.classList.remove("fading");
   }
+
   bannerImg.addEventListener("transitionend", aoTerminar);
 }
 
@@ -51,13 +53,16 @@ function montaEventos() {
   const proximos = eventos.filter(e => e.data >= hoje);
   const sec = document.createElement("section");
   sec.className = "eventos-wrapper";
-  sec.innerHTML = `<h2>📅 Próximos Eventos</h2>
+  sec.innerHTML = `
+    <h2>📅 Próximos Eventos</h2>
     <ul class="lista-eventos">
       ${proximos.map(ev => `<li><strong>${ev.data}</strong> — ${ev.titulo}</li>`).join("")}
-    </ul>`;
+    </ul>
+  `;
   const footer = document.querySelector("footer");
   footer.parentNode.insertBefore(sec, footer);
 }
+
 montaEventos();
 
 /* ------------------ BUSCA INTERNA COM RESULTADOS ------------------ */
@@ -91,20 +96,17 @@ document.addEventListener("DOMContentLoaded", () => {
       encontrados.forEach(card => {
         const nomeEl = card.querySelector(".estudante-nome");
         const imgEl = card.querySelector(".estudante-imagem");
-
         const item = document.createElement("div");
         item.className = "resultado-item";
         item.innerHTML = `
           <img src="${imgEl ? imgEl.src : ''}" alt="${nomeEl.textContent}">
           <span>${nomeEl.textContent}</span>
         `;
-
         item.addEventListener("click", () => {
           card.scrollIntoView({ behavior: "smooth", block: "center" });
           resultadosDiv.style.display = "none";
           busca.value = "";
         });
-
         resultadosDiv.appendChild(item);
       });
 
@@ -137,6 +139,7 @@ const modalHTML = `
     </div>
   </div>
 `;
+
 document.body.insertAdjacentHTML("beforeend", modalHTML);
 
 const overlay = document.getElementById("modalLogin");
@@ -151,6 +154,7 @@ function abrirModal() {
   overlay.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
+
 function fecharModal() {
   overlay.classList.remove("ativo");
   overlay.setAttribute("aria-hidden", "true");
@@ -159,9 +163,12 @@ function fecharModal() {
   document.getElementById("loginUser").value = "";
   document.getElementById("loginPass").value = "";
 }
+
 btnLogin.addEventListener("click", abrirModal);
 btnFechar.addEventListener("click", fecharModal);
-overlay.addEventListener("click", (e) => { if (e.target === overlay) fecharModal(); });
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) fecharModal();
+});
 
 // Login persistente
 if (localStorage.getItem("logado") === "true") loginSucesso();
@@ -186,17 +193,20 @@ btnConfirm.addEventListener("click", () => {
 btnCriarConta.addEventListener("click", () => {
   const u = document.getElementById("loginUser").value.trim();
   const p = document.getElementById("loginPass").value.trim();
+
   if (!u || !p) {
     msg.textContent = "Preencha usuário e senha!";
     msg.className = "modal-msg erro";
     return;
   }
+
   const contas = JSON.parse(localStorage.getItem("contas") || "{}");
   if (contas[u]) {
     msg.textContent = "Usuário já existe!";
     msg.className = "modal-msg erro";
     return;
   }
+
   contas[u] = p;
   localStorage.setItem("contas", JSON.stringify(contas));
   msg.textContent = "Conta criada com sucesso!";
@@ -224,11 +234,13 @@ if (header) header.appendChild(btnTema);
 function atualizaTextoTema() {
   btnTema.textContent = document.body.classList.contains("dark") ? "☀️ Modo Claro" : "🌙 Modo Escuro";
 }
+
 btnTema.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   localStorage.setItem("tema", document.body.classList.contains("dark") ? "dark" : "light");
   atualizaTextoTema();
 });
+
 if (localStorage.getItem("tema") === "dark") document.body.classList.add("dark");
 atualizaTextoTema();
 
@@ -244,12 +256,3 @@ window.addEventListener("scroll", () => {
 });
 
 btnTopo.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-/*
-  REMOVIDO: O bloco de código abaixo foi removido pois
-  referenciava o modal estático ('#area-restrita-modal')
-  que foi apagado do HTML.
-*/
-// === CORREÇÃO: controle da janela da Área Restrita ===
-// const botaoAreaRestrita = document.getElementById('botao-area-restrita');
-// ... (código removido)
