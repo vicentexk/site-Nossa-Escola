@@ -1,68 +1,29 @@
-/* ===== Variáveis Globais ===== */
-:root {
-  /* Cores Tema Claro */
-  --bg: #ffffff;          /* fundo da página */
-  --fg: #222222;          /* texto principal */
-  --header-bg: #424e61;    /* fundo do header */
-  --header-fg: #ffffff;     /* texto do header */
-  --card-bg: #fafafa;      /* fundo de cartões/seções */
-  --banner-bg: #424e61;    /* fundo do banner */
-  --botao-bg: transparent; /* fundo dos botões */
-  --botao-border: #ccc;     /* borda dos botões */
-  --modal-bg: #ffffff;      /* fundo do modal */
-  --resultado-bg: #ffffff; /* fundo resultados da busca */
-  --resultado-fg: #333333; /* texto resultados */
-  --footer-bg: linear-gradient(#40A2E3, #1b445f); /* fundo do footer */
-  --footer-fg: #ffffff;     /* texto footer */
-}
-
-/* ===== Tema Escuro ===== */
-body.dark {
-  --bg: #0f1720;
-  --fg: #e6eef8;
-  --header-bg: #1c2533;
-  --header-fg: #e6eef8;
-  --card-bg: #111827;
-  --banner-bg: #1c2533;
-  --botao-bg: transparent;
-  --botao-border: #666;
-  --modal-bg: #1a1a1a;
-  --resultado-bg: #1a1a1a;
-  --resultado-fg: #e6eef8;
-  --footer-bg: linear-gradient(#1b1f2b, #0d1018);
-  --footer-fg: #e6eef8;
-}
-
-/* ===== Aplica variáveis ===== */
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: var(--bg);
-  color: var(--fg);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: 
-    opacity 600ms ease,
-    transform 600ms ease,
-    background-color 300ms ease,
-    color 300ms ease;
-}
-
-body.fade-ready {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== Reset básico (movido para cá) ===== */
+/* ===== Reset básico ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  /* Fade-in inicial */
+  opacity: 0;
+  transform: translateY(6px);
+  /* Todas as transições juntas */
+  transition: opacity 600ms ease, transform 600ms ease, background-color 300ms ease, color 300ms ease;
+}
+
+/* Quando a página estiver pronta, ativar fade-in */
+body.fade-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ===== Header ===== */
 header {
-  background-color: var(--header-bg);
-  color: var(--header-fg);
+  background-color: #424e61;
+  color: white;
   width: 100%;
   padding: 12px 20px;
   display: flex;
@@ -78,7 +39,7 @@ header {
 }
 
 .cabecalho-imagem img {
-  width: 60px;
+  width: 60px; /* tamanho ajustado para o logo */
   height: auto;
 }
 
@@ -97,47 +58,13 @@ header {
 }
 
 .sociais img {
-  width: 36px;
+  width: 36px; /* tamanho fixo dos ícones */
   height: 36px;
   transition: transform 0.25s ease;
 }
 
 .sociais img:hover {
   transform: scale(1.1);
-}
-
-header .busca-animada {
-  margin-left: 12px;
-  padding: 10px 22px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  outline: none;
-  transition: box-shadow 200ms ease, transform 200ms ease, background-color 200ms ease, color 200ms ease;
-  background-color: var(--bg);
-  color: var(--fg);
-}
-
-header .busca-animada:focus {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
-}
-
-/* Botões tema e login */
-header .botao-tema,
-header .abrir-login {
-  margin-left: 8px;
-  padding: 10px 22px;
-  border-radius: 8px;
-  background-color: var(--botao-bg);
-  border: 1px solid var(--botao-border);
-  cursor: pointer;
-  transition: background-color 200ms ease, transform 120ms ease;
-  color: var(--fg);
-}
-
-header .botao-tema:hover,
-header .abrir-login:hover {
-  transform: translateY(-2px);
 }
 
 /* ===== Banner ===== */
@@ -148,7 +75,7 @@ header .abrir-login:hover {
   position: relative;
   overflow: hidden;
   width: 100%;
-  background-color: var(--banner-bg);
+  background-color: #424e61;
 }
 
 .banner1 img {
@@ -172,20 +99,8 @@ header .abrir-login:hover {
   font-weight: 600;
 }
 
-.estudante {
-  background-color: var(--card-bg);
-  padding: 24px 0;
-  text-align: center;
-}
-
-.estudante-div {
-  text-align: center;
-  padding: 24px 0;
-}
-
 .estudante-nome {
   text-align: center;
-  color: var(--fg);
 }
 
 .estudante-imagem {
@@ -198,11 +113,60 @@ header .abrir-login:hover {
   padding: 4px 8px;
 }
 
+.estudante {
+  background-color: #354974;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.estudante-div {
+  text-align: center;
+  padding: 24px 0;
+}
+
 .estudantes_todos {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+/* ===== Footer ===== */
+.escola {
+  background-image: linear-gradient(#40A2E3, #1b445f);
+  color: white;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.escola-titulo {
+  padding: 20px;
+  text-align: center;
+}
+
+.logo_rodape {
+  height: 70px;
+  padding: 12px 0;
+}
+
+.link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ===== Barra de busca animada ===== */
+header .busca-animada {
+  margin-left: 12px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+
+header .busca-animada:focus {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
 
 /* ===== Eventos ===== */
@@ -211,9 +175,9 @@ header .abrir-login:hover {
   margin: 24px auto;
   padding: 14px;
   border-radius: 10px;
-  background-color: var(--card-bg);
+  background: #fafafa;
   box-shadow: 0 6px 20px rgba(0,0,0,0.03);
-  transition: transform 300ms ease, opacity 300ms ease, background-color 300ms ease;
+  transition: transform 300ms ease, opacity 300ms ease;
 }
 
 .eventos-wrapper h2 {
@@ -227,10 +191,10 @@ header .abrir-login:hover {
 /* ===== Resultados da busca ===== */
 .resultados-busca {
   position: absolute;
-  top: 65px;
+  top: 65px; /* fica logo abaixo do header */
   left: 20px;
   width: 280px;
-  background-color: var(--resultado-bg);
+  background: #fff;
   border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   z-index: 50;
@@ -263,7 +227,24 @@ header .abrir-login:hover {
 
 .resultado-item span {
   font-size: 0.95rem;
-  color: var(--resultado-fg);
+  color: #333;
+}
+
+/* ===== Botões tema e login ===== */
+header .botao-tema,
+header .abrir-login {
+  margin-left: 8px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 200ms ease, transform 120ms ease;
+}
+
+header .botao-tema:hover,
+header .abrir-login:hover {
+  transform: translateY(-2px);
 }
 
 /* ===== Modal de login ===== */
@@ -277,10 +258,7 @@ header .abrir-login:hover {
   opacity: 0;
   pointer-events: none;
   transition: opacity 220ms ease;
-  /* CORRIGIDO: z-index aumentado para 100 
-    para ficar sobre o botão "Topo" (que tem 90)
-  */
-  z-index: 100; 
+  z-index: 80;
 }
 
 .modal-overlay.ativo {
@@ -291,13 +269,16 @@ header .abrir-login:hover {
 .modal-card {
   width: 320px;
   max-width: calc(100% - 40px);
-  background-color: var(--modal-bg);
+  background: #fff;
   padding: 18px;
   border-radius: 10px;
   box-shadow: 0 18px 40px rgba(0,0,0,0.12);
   transform: translateY(8px);
-  transition: transform 220ms ease, background-color 220ms ease;
-  position: relative; /* Adicionado para o botão fechar */
+  transition: transform 220ms ease;
+}
+
+.modal-overlay.ativo .modal-card {
+  transform: translateY(0);
 }
 
 .modal-card input {
@@ -306,17 +287,21 @@ header .abrir-login:hover {
   margin: 8px 0;
   border-radius: 6px;
   border: 1px solid #ddd;
-  background-color: var(--bg);
-  color: var(--fg);
 }
 
-/* Mensagens do modal */
+/* Mensagens no modal */
 .modal-msg {
   margin-top: 6px;
   font-size: 0.95rem;
 }
-.modal-msg.erro { color: #b00020; }
-.modal-msg.sucesso { color: #007a2f; }
+
+.modal-msg.erro {
+  color: #b00020;
+}
+
+.modal-msg.sucesso {
+  color: #007a2f;
+}
 
 .modal-fechar {
   position: absolute;
@@ -326,33 +311,9 @@ header .abrir-login:hover {
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
-  color: var(--fg);
 }
 
-/* ===== Footer ===== */
-.escola {
-  background: var(--footer-bg);
-  color: var(--footer-fg);
-  padding: 24px 0;
-  text-align: center;
-}
-
-.escola-titulo {
-  padding: 20px;
-  text-align: center;
-}
-
-.logo_rodape {
-  height: 70px;
-  padding: 12px 0;
-}
-
-.link {
-  color: var(--footer-fg);
-  text-decoration: none;
-}
-
-/* ===== Botão voltar ao topo ===== */
+/* ===== Back to top ===== */
 button.topo {
   position: fixed;
   right: 20px;
@@ -373,27 +334,54 @@ button.topo {
   animation: pulse 2s infinite;
 }
 
-/* Classe 'mostra' para o botão topo */
-button.topo.mostra {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 @keyframes pulse {
-  0% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4); }
-  70% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0); }
-  100% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0); }
+  0% {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4);
+  }
+  70% {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0);
+  }
+  100% {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0);
+  }
 }
 
-/* ===== Responsividade ===== */
+/* ===== Tema escuro ===== */
+:root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --card: #fafafa;
+}
+
+body.dark {
+  --bg: #0f1720;
+  --fg: #e6eef8;
+  --card: #111827;
+  background-color: #12161b;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+.eventos-wrapper {
+  background: var(--card);
+}
+
+/* ===== Pequenas responsividades ===== */
 @media (max-width:700px) {
-  .banner1 { max-height: 240px; }
-  header .busca-animada { display: none; }
-  .titulo_site { font-size: 20px; }
-  .sociais img { width: 30px; height: 30px; }
+  .banner1 {
+    max-height: 240px;
+  }
+  header .busca-animada {
+    display: none;
+  }
+  .titulo_site {
+    font-size: 20px;
+  }
+  .sociais img {
+    width: 30px;
+    height: 30px;
+  }
 }
-
-/* REMOVIDO: O bloco de CSS com !important
-  foi removido pois o z-index do modal
-  foi corrigido acima.
-*/
