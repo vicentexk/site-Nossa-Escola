@@ -426,3 +426,371 @@ header .botao-tema { display: inline-flex; align-items: center; gap:8px; }
 /* Você já controla adicionando/removendo a classe `dark` no <body>.
    Seu JS já faz isso e salva em localStorage; se quiser, posso
    adaptar o texto do botão com ícones (sol/lua) também. */
+
+/* =========================================================
+   RESET + BASE
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* Fade-in inicial */
+body.fade-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   HEADER / CABEÇALHO
+   ========================================================= */
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  z-index: 5;
+}
+
+.cabecalho-itens {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cabecalho-imagem img {
+  width: 60px;
+  height: auto;
+}
+
+.titulo_site {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--header-text);
+}
+
+/* ícones sociais */
+.sociais {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sociais img {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.25s ease;
+}
+.sociais img:hover { transform: scale(1.08); }
+
+/* botão tema e login genéricos */
+header .botao-tema,
+header .abrir-login {
+  margin-left: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 120ms ease;
+  font-weight: 600;
+}
+header .botao-tema:hover,
+header .abrir-login:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   BANNER / CARROSSEL
+   ========================================================= */
+.banner1 {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background-color: var(--banner-bg);
+}
+
+.banner1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 800ms ease;
+  opacity: 1;
+}
+
+.banner1 img.fading {
+  opacity: 0;
+}
+
+/* para garantir que o banner não empurre o modal: */
+.banner1,
+header {
+  z-index: 1;
+}
+
+/* =========================================================
+   SEÇÃO DE ESTUDANTES / CARDS
+   ========================================================= */
+.estudante_titulo {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.estudante {
+  background-color: var(--estudante-bg);
+  padding: 24px 0;
+  text-align: center;
+  color: var(--header-text);
+}
+
+.estudante-div {
+  text-align: center;
+  padding: 24px 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius: 8px;
+}
+
+.estudante-imagem { width: 120px; border-radius: 8px; }
+.estudante-icone { width: 38px; padding: 4px 8px; }
+
+.estudantes_todos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* =========================================================
+   EVENTOS / CARDS
+   ========================================================= */
+.eventos-wrapper {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 18px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  box-shadow: 0 6px 20px var(--card-shadow);
+  transition: transform 300ms ease, opacity 300ms ease, background 300ms ease;
+}
+
+.eventos-wrapper h2 { margin: 0 0 10px 0; color: var(--fg); }
+.lista-eventos li { margin: 6px 0; color: var(--muted); }
+
+/* =========================================================
+   RESULTADOS DA BUSCA
+   ========================================================= */
+.resultados-busca {
+  position: absolute;
+  top: 65px;
+  left: 20px;
+  width: 300px;
+  background: var(--result-bg);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  z-index: 2000;
+  display: none;
+  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.resultado-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  border-bottom: 1px solid var(--input-border);
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+.resultado-item:hover { background: var(--result-hover); }
+
+.resultado-item img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.resultado-item span { font-size: 0.95rem; color: var(--fg); }
+
+/* =========================================================
+   MODAL DE LOGIN (FIXO E CENTRALIZADO)
+   ========================================================= */
+.modal-overlay {
+  position: fixed;           /* fica fora do fluxo da página */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  z-index: 9999;             /* acima de tudo */
+}
+
+.modal-overlay.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  width: 360px;
+  max-width: calc(100% - 36px);
+  background: var(--modal-bg);
+  color: var(--modal-text);
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px var(--shadow-strong);
+  transform: translateY(8px);
+  transition: transform 220ms ease, opacity 220ms ease;
+  position: relative;
+  z-index: 10000;
+}
+.modal-overlay.ativo .modal-card { transform: translateY(0); }
+
+.modal-card input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--fg);
+  outline: none;
+}
+
+.modal-fechar {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.modal-msg { margin-top: 8px; font-size: 0.95rem; color: var(--muted); }
+.modal-msg.erro { color: #b00020; }
+.modal-msg.sucesso { color: #0a8a3a; }
+
+/* =========================================================
+   BOTÃO VOLTAR AO TOPO
+   ========================================================= */
+button.topo {
+  position: fixed;
+  right: 20px;
+  bottom: 22px;
+  padding: 12px 14px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--backtotop-grad1), var(--backtotop-grad2));
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transform: translateY(8px);
+  opacity: 1;
+  transition: transform 220ms ease, opacity 220ms ease, background 200ms ease, box-shadow 200ms ease;
+  z-index: 9000;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4); }
+  70% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0); }
+  100% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0); }
+}
+.topo.mostra { display: block; }
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+.escola {
+  background-image: linear-gradient(var(--footer-grad-1), var(--footer-grad-2));
+  color: var(--header-text);
+  padding: 24px 0;
+  text-align: center;
+}
+.escola-titulo { padding: 20px; }
+.logo_rodape { height: 70px; padding: 12px 0; }
+.link { color: var(--link); text-decoration: none; }
+
+/* =========================================================
+   OUTROS (botões, links, responsividade)
+   ========================================================= */
+a { color: var(--link); text-decoration: none; }
+button { font-family: inherit; }
+
+header .busca-animada {
+  margin-left: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--fg);
+  outline: none;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+header .busca-animada:focus { box-shadow: 0 6px 20px rgba(0,0,0,0.06); transform: translateY(-2px); }
+
+header .botao-tema { display: inline-flex; align-items: center; gap:8px; }
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .banner1 { height: 240px; }
+  .titulo_site { font-size: 22px; }
+  .cabecalho-imagem img { width: 48px; }
+}
+@media (max-width: 700px) {
+  .banner1 { height: 200px; }
+  header .busca-animada { display: none; }
+  .titulo_site { font-size: 20px; }
+  .sociais img { width: 30px; height: 30px; }
+  .resultados-busca { left: 10px; width: calc(100% - 20px); top: 80px; }
+}
+
+/* =========================================================
+   Pequena ajuda visual: quando usar o modo escuro
+   ========================================================= */
+/* Você já controla adicionando/removendo a classe `dark` no <body>.
+   Seu JS já faz isso e salva em localStorage; se quiser, posso
+   adaptar o texto do botão com ícones (sol/lua) também. */
