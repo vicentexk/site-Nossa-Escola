@@ -148,17 +148,17 @@ const btnConfirm = document.getElementById("btnLoginConfirm");
 const btnCriarConta = document.getElementById("btnCriarConta");
 const msg = document.getElementById("modalMsg");
 
-// Funções abrir/fechar modal
+// Funções abrir/fechar modal com scroll travado
 function abrirModal() {
   overlay.classList.add("ativo");
   overlay.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  document.body.classList.add("modal-aberto"); // trava scroll
 }
 
 function fecharModal() {
   overlay.classList.remove("ativo");
   overlay.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+  document.body.classList.remove("modal-aberto"); // libera scroll
   msg.textContent = "";
   document.getElementById("loginUser").value = "";
   document.getElementById("loginPass").value = "";
@@ -169,6 +169,15 @@ btnFechar.addEventListener("click", fecharModal);
 overlay.addEventListener("click", (e) => {
   if (e.target === overlay) fecharModal();
 });
+
+// ------------------ CSS ADICIONAL PARA TRAVAR SCROLL ------------------
+const style = document.createElement('style');
+style.textContent = `
+  body.modal-aberto {
+    overflow: hidden;
+  }
+`;
+document.head.appendChild(style);
 
 // Login persistente
 if (localStorage.getItem("logado") === "true") loginSucesso();
