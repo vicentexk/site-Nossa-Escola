@@ -1,35 +1,112 @@
-/* ===== Reset básico ===== */
+/* =========================================================
+   Tema (cores centralizadas) - editar aqui quando quiser
+   ========================================================= */
+/* Modo claro - padrão */
+:root {
+  --bg: #ffffff;
+  --fg: #222222;
+  --muted: #666666;
+  --header-bg: #424e61;
+  --header-text: #ffffff;
+  --banner-bg: #424e61;
+  --estudante-bg: #354974;
+  --card-bg: #fafafa;
+  --card-shadow: rgba(0,0,0,0.06);
+  --footer-grad-1: #40A2E3;
+  --footer-grad-2: #1b445f;
+  --link: #0b5ed7;
+  --input-bg: #ffffff;
+  --input-border: #ddd;
+  --button-bg: rgba(0,0,0,0.03);
+  --button-border: #ccc;
+  --button-text: #222222;
+  --button-hover: rgba(0,0,0,0.06);
+  --result-bg: #ffffff;
+  --result-hover: #f5f5f5;
+  --modal-bg: #ffffff;
+  --modal-text: #222222;
+  --backtotop-grad1: #0b5ed7;
+  --backtotop-grad2: #3aa0ff;
+  --shadow-strong: rgba(0,0,0,0.12);
+}
+
+/* Modo escuro */
+body.dark {
+  --bg: #0f1720;
+  --fg: #e6eef8;
+  --muted: #9aa7bf;
+  --header-bg: #1e293b;
+  --header-text: #e6eef8;
+  --banner-bg: #1e293b;
+  --estudante-bg: #1b2a46;
+  --card-bg: #0f1724;
+  --card-shadow: rgba(0,0,0,0.6);
+  --footer-grad-1: #0b3a5e;
+  --footer-grad-2: #040f1f;
+  --link: #7fc7ff;
+  --input-bg: #152233;
+  --input-border: #2b3b52;
+  --button-bg: #162530;
+  --button-border: #2b3b52;
+  --button-text: #e6eef8;
+  --button-hover: #243646;
+  --result-bg: #13202b;
+  --result-hover: #213243;
+  --modal-bg: #14202b;
+  --modal-text: #e6eef8;
+  --backtotop-grad1: #2563eb;
+  --backtotop-grad2: #1d4ed8;
+  --shadow-strong: rgba(0,0,0,0.55);
+}
+
+/* =========================================================
+   RESET + BASE
+   ========================================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  /* Fade-in inicial */
-  opacity: 0;
-  transform: translateY(6px);
-  /* Todas as transições juntas */
-  transition: opacity 600ms ease, transform 600ms ease, background-color 300ms ease, color 300ms ease;
+html, body {
+  height: 100%;
 }
 
-/* Quando a página estiver pronta, ativar fade-in */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+/* Fade-in inicial */
 body.fade-ready {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ===== Header ===== */
+/* =========================================================
+   HEADER / CABEÇALHO
+   ========================================================= */
 header {
-  background-color: #424e61;
-  color: white;
+  background-color: var(--header-bg);
+  color: var(--header-text);
   width: 100%;
   padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 12px;
+  position: relative;
+  z-index: 5;
 }
 
 .cabecalho-itens {
@@ -39,51 +116,66 @@ header {
 }
 
 .cabecalho-imagem img {
-  width: 60px; /* tamanho ajustado para o logo */
+  width: 60px;
   height: auto;
 }
 
 .titulo_site {
-  padding: 0;
   text-align: center;
   font-size: 26px;
   font-weight: 600;
+  color: var(--header-text);
 }
 
+/* ícones sociais */
 .sociais {
   display: flex;
-  justify-content: flex-end;
+  gap: 10px;
   align-items: center;
-  gap: 12px;
 }
-
 .sociais img {
-  width: 36px; /* tamanho fixo dos ícones */
+  width: 36px;
   height: 36px;
   transition: transform 0.25s ease;
 }
+.sociais img:hover { transform: scale(1.08); }
 
-.sociais img:hover {
-  transform: scale(1.1);
+/* botão tema e login genéricos */
+header .botao-tema,
+header .abrir-login {
+  margin-left: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 120ms ease;
+  font-weight: 600;
+}
+header .botao-tema:hover,
+header .abrir-login:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
 }
 
-/* ===== Banner ===== */
+/* =========================================================
+   BANNER / CARROSSEL
+   ========================================================= */
 .banner1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  overflow: hidden;
   width: 100%;
-  background-color: #424e61;
+  height: 320px;
+  overflow: hidden;
+  background-color: var(--banner-bg);
 }
 
 .banner1 img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   display: block;
-  transition: opacity 600ms ease;
+  transition: opacity 800ms ease;
   opacity: 1;
 }
 
@@ -91,116 +183,79 @@ header {
   opacity: 0;
 }
 
-/* ===== Seções estudantes ===== */
+/* para garantir que o banner não empurre o modal: */
+.banner1,
+header {
+  z-index: 1;
+}
+
+/* =========================================================
+   SEÇÃO DE ESTUDANTES / CARDS
+   ========================================================= */
 .estudante_titulo {
   padding: 40px 20px;
   text-align: center;
   font-size: 22px;
   font-weight: 600;
-}
-
-.estudante-nome {
-  text-align: center;
-}
-
-.estudante-imagem {
-  width: 120px;
-  border-radius: 8px;
-}
-
-.estudante-icone {
-  width: 38px;
-  padding: 4px 8px;
+  color: var(--fg);
 }
 
 .estudante {
-  background-color: #354974;
+  background-color: var(--estudante-bg);
   padding: 24px 0;
   text-align: center;
+  color: var(--header-text);
 }
 
 .estudante-div {
   text-align: center;
-  padding: 24px 0;
+  padding: 24px 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius: 8px;
 }
+
+.estudante-imagem { width: 120px; border-radius: 8px; }
+.estudante-icone { width: 38px; padding: 4px 8px; }
 
 .estudantes_todos {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
-}
-
-/* ===== Footer ===== */
-.escola {
-  background-image: linear-gradient(#40A2E3, #1b445f);
-  color: white;
-  padding: 24px 0;
-  text-align: center;
-}
-
-.escola-titulo {
   padding: 20px;
-  text-align: center;
 }
 
-.logo_rodape {
-  height: 70px;
-  padding: 12px 0;
-}
-
-.link {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* ===== Barra de busca animada ===== */
-header .busca-animada {
-  margin-left: 12px;
-  padding: 10px 22px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  outline: none;
-  transition: box-shadow 200ms ease, transform 200ms ease;
-}
-
-header .busca-animada:focus {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transform: translateY(-2px);
-}
-
-/* ===== Eventos ===== */
+/* =========================================================
+   EVENTOS / CARDS
+   ========================================================= */
 .eventos-wrapper {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 24px auto;
-  padding: 14px;
+  padding: 18px;
   border-radius: 10px;
-  background: #fafafa;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.03);
-  transition: transform 300ms ease, opacity 300ms ease;
+  background: var(--card-bg);
+  box-shadow: 0 6px 20px var(--card-shadow);
+  transition: transform 300ms ease, opacity 300ms ease, background 300ms ease;
 }
 
-.eventos-wrapper h2 {
-  margin: 0 0 10px 0;
-}
+.eventos-wrapper h2 { margin: 0 0 10px 0; color: var(--fg); }
+.lista-eventos li { margin: 6px 0; color: var(--muted); }
 
-.lista-eventos li {
-  margin: 6px 0;
-}
-
-/* ===== Resultados da busca ===== */
+/* =========================================================
+   RESULTADOS DA BUSCA
+   ========================================================= */
 .resultados-busca {
   position: absolute;
-  top: 65px; /* fica logo abaixo do header */
+  top: 65px;
   left: 20px;
-  width: 280px;
-  background: #fff;
+  width: 300px;
+  background: var(--result-bg);
   border-radius: 10px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  z-index: 50;
+  z-index: 2000;
   display: none;
   overflow: hidden;
-  max-height: 260px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -209,14 +264,11 @@ header .busca-animada:focus {
   align-items: center;
   padding: 10px;
   gap: 10px;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--input-border);
+  transition: background-color 0.15s ease;
   cursor: pointer;
 }
-
-.resultado-item:hover {
-  background-color: #f5f5f5;
-}
+.resultado-item:hover { background: var(--result-hover); }
 
 .resultado-item img {
   width: 46px;
@@ -224,83 +276,57 @@ header .busca-animada:focus {
   border-radius: 50%;
   object-fit: cover;
 }
+.resultado-item span { font-size: 0.95rem; color: var(--fg); }
 
-.resultado-item span {
-  font-size: 0.95rem;
-  color: #333;
-}
-
-/* ===== Botões tema e login ===== */
-header .botao-tema,
-header .abrir-login {
-  margin-left: 8px;
-  padding: 10px 22px;
-  border-radius: 8px;
-  background: transparent;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  transition: background-color 200ms ease, transform 120ms ease;
-}
-
-header .botao-tema:hover,
-header .abrir-login:hover {
-  transform: translateY(-2px);
-}
-
-/* ===== Modal de login ===== */
+/* =========================================================
+   MODAL DE LOGIN (FIXO E CENTRALIZADO)
+   ========================================================= */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
+  position: fixed;           /* fica fora do fluxo da página */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(10,10,10,0.45);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 220ms ease;
-  z-index: 80;
+  transition: opacity 0.28s ease;
+  z-index: 9999;             /* acima de tudo */
 }
 
 .modal-overlay.ativo {
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: all;
 }
 
 .modal-card {
-  width: 320px;
-  max-width: calc(100% - 40px);
-  background: #fff;
+  width: 360px;
+  max-width: calc(100% - 36px);
+  background: var(--modal-bg);
+  color: var(--modal-text);
   padding: 18px;
-  border-radius: 10px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  box-shadow: 0 18px 40px var(--shadow-strong);
   transform: translateY(8px);
-  transition: transform 220ms ease;
+  transition: transform 220ms ease, opacity 220ms ease;
+  position: relative;
+  z-index: 10000;
 }
-
-.modal-overlay.ativo .modal-card {
-  transform: translateY(0);
-}
+.modal-overlay.ativo .modal-card { transform: translateY(0); }
 
 .modal-card input {
   width: 100%;
-  padding: 8px 10px;
+  padding: 10px 12px;
   margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-}
-
-/* Mensagens no modal */
-.modal-msg {
-  margin-top: 6px;
-  font-size: 0.95rem;
-}
-
-.modal-msg.erro {
-  color: #b00020;
-}
-
-.modal-msg.sucesso {
-  color: #007a2f;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--fg);
+  outline: none;
 }
 
 .modal-fechar {
@@ -311,9 +337,16 @@ header .abrir-login:hover {
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
+  color: var(--muted);
 }
 
-/* ===== Back to top ===== */
+.modal-msg { margin-top: 8px; font-size: 0.95rem; color: var(--muted); }
+.modal-msg.erro { color: #b00020; }
+.modal-msg.sucesso { color: #0a8a3a; }
+
+/* =========================================================
+   BOTÃO VOLTAR AO TOPO
+   ========================================================= */
 button.topo {
   position: fixed;
   right: 20px;
@@ -321,7 +354,7 @@ button.topo {
   padding: 12px 14px;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg, #0b5ed7, #3aa0ff);
+  background: linear-gradient(135deg, var(--backtotop-grad1), var(--backtotop-grad2));
   color: #fff;
   font-size: 18px;
   font-weight: bold;
@@ -330,58 +363,66 @@ button.topo {
   transform: translateY(8px);
   opacity: 1;
   transition: transform 220ms ease, opacity 220ms ease, background 200ms ease, box-shadow 200ms ease;
-  z-index: 90;
+  z-index: 9000;
   animation: pulse 2s infinite;
 }
-
 @keyframes pulse {
-  0% {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4);
-  }
-  70% {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0);
-  }
-  100% {
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0);
-  }
+  0% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0.4); }
+  70% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 12px rgba(58,160,255,0); }
+  100% { box-shadow: 0 6px 18px rgba(0,0,0,0.25), 0 0 0 0 rgba(58,160,255,0); }
 }
+.topo.mostra { display: block; }
 
-/* ===== Tema escuro ===== */
-:root {
-  --bg: #ffffff;
-  --fg: #222222;
-  --card: #fafafa;
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+.escola {
+  background-image: linear-gradient(var(--footer-grad-1), var(--footer-grad-2));
+  color: var(--header-text);
+  padding: 24px 0;
+  text-align: center;
 }
+.escola-titulo { padding: 20px; }
+.logo_rodape { height: 70px; padding: 12px 0; }
+.link { color: var(--link); text-decoration: none; }
 
-body.dark {
-  --bg: #0f1720;
-  --fg: #e6eef8;
-  --card: #111827;
-  background-color: #12161b;
-}
+/* =========================================================
+   OUTROS (botões, links, responsividade)
+   ========================================================= */
+a { color: var(--link); text-decoration: none; }
+button { font-family: inherit; }
 
-body {
-  background-color: var(--bg);
+header .busca-animada {
+  margin-left: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
   color: var(--fg);
+  outline: none;
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+header .busca-animada:focus { box-shadow: 0 6px 20px rgba(0,0,0,0.06); transform: translateY(-2px); }
+
+header .botao-tema { display: inline-flex; align-items: center; gap:8px; }
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .banner1 { height: 240px; }
+  .titulo_site { font-size: 22px; }
+  .cabecalho-imagem img { width: 48px; }
+}
+@media (max-width: 700px) {
+  .banner1 { height: 200px; }
+  header .busca-animada { display: none; }
+  .titulo_site { font-size: 20px; }
+  .sociais img { width: 30px; height: 30px; }
+  .resultados-busca { left: 10px; width: calc(100% - 20px); top: 80px; }
 }
 
-.eventos-wrapper {
-  background: var(--card);
-}
-
-/* ===== Pequenas responsividades ===== */
-@media (max-width:700px) {
-  .banner1 {
-    max-height: 240px;
-  }
-  header .busca-animada {
-    display: none;
-  }
-  .titulo_site {
-    font-size: 20px;
-  }
-  .sociais img {
-    width: 30px;
-    height: 30px;
-  }
-}
+/* =========================================================
+   Pequena ajuda visual: quando usar o modo escuro
+   ========================================================= */
+/* Você já controla adicionando/removendo a classe `dark` no <body>.
+   Seu JS já faz isso e salva em localStorage; se quiser, posso
+   adaptar o texto do botão com ícones (sol/lua) também. */
