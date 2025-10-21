@@ -1,62 +1,59 @@
-/* =========================================================
-   Tema (cores centralizadas) - editar aqui quando quiser
-   ========================================================= */
-/* Modo claro - padrão */
+/* 🌞 Modo claro - padrão */
 :root {
-  --bg: #ffffff;
-  --fg: #222222;
-  --muted: #666666;
-  --header-bg: #424e61;
+  --bg: #f5f8ff;                /* fundo geral */
+  --fg: #1b2a49;                /* texto principal */
+  --muted: #66789a;             /* textos secundários */
+  --header-bg: #1e3a8a;         /* cabeçalho */
   --header-text: #ffffff;
-  --banner-bg: #424e61;
-  --estudante-bg: #354974;
-  --card-bg: #fafafa;
-  --card-shadow: rgba(0,0,0,0.06);
-  --footer-grad-1: #40A2E3;
-  --footer-grad-2: #1b445f;
-  --link: #0b5ed7;
+  --banner-bg: #274690;
+  --estudante-bg: #3b5aa0;      /* fundo da seção de alunos */
+  --card-bg: #ffffff;           /* cards */
+  --card-shadow: rgba(30, 58, 138, 0.08);
+  --footer-grad-1: #3b82f6;
+  --footer-grad-2: #1e3a8a;     /* gradiente rodapé */
+  --link: #2563eb;
   --input-bg: #ffffff;
-  --input-border: #ddd;
-  --button-bg: rgba(0,0,0,0.03);
-  --button-border: #ccc;
-  --button-text: #222222;
-  --button-hover: rgba(0,0,0,0.06);
+  --input-border: #c7d2fe;
+  --button-bg: #e0e7ff;
+  --button-border: #c7d2fe;
+  --button-text: #1e3a8a;
+  --button-hover: #c7d2fe;
   --result-bg: #ffffff;
-  --result-hover: #f5f5f5;
+  --result-hover: #f1f5ff;
   --modal-bg: #ffffff;
-  --modal-text: #222222;
-  --backtotop-grad1: #0b5ed7;
-  --backtotop-grad2: #3aa0ff;
-  --shadow-strong: rgba(0,0,0,0.12);
+  --modal-text: #1b2a49;
+  --backtotop-grad1: #2563eb;
+  --backtotop-grad2: #3b82f6;
+  --shadow-strong: rgba(30, 58, 138, 0.15);
 }
 
-/* Modo escuro */
+/* 🌙 Modo escuro */
 body.dark {
-  --bg: #0f1720;
-  --fg: #e6eef8;
-  --muted: #9aa7bf;
-  --header-bg: #1e293b;
-  --header-text: #e6eef8;
+  --bg: #0a1222;
+  --fg: #e2e8f0;
+  --muted: #94a3b8;
+  --header-bg: #111c36;
+  --header-text: #e2e8f0;
   --banner-bg: #1e293b;
-  --estudante-bg: #1b2a46;
-  --card-bg: #0f1724;
+  --estudante-bg: #1b2a46;      /* fundo da seção de alunos */
+  --card-bg: #162033;           /* cards */
   --card-shadow: rgba(0,0,0,0.6);
-  --footer-grad-1: #0b3a5e;
-  --footer-grad-2: #040f1f;
-  --link: #7fc7ff;
-  --input-bg: #152233;
-  --input-border: #2b3b52;
-  --button-bg: #162530;
-  --button-border: #2b3b52;
-  --button-text: #e6eef8;
-  --button-hover: #243646;
-  --result-bg: #13202b;
-  --result-hover: #213243;
-  --modal-bg: #14202b;
-  --modal-text: #e6eef8;
-  --backtotop-grad1: #2563eb;
-  --backtotop-grad2: #1d4ed8;
-  --shadow-strong: rgba(0,0,0,0.55);
+  --footer-grad-1: #1e3a8a;
+  --footer-grad-2: #0f172a;
+  --link: #60a5fa;
+  --input-bg: #1e293b;
+  --input-border: #334155;
+  --button-bg: #1e293b;
+  --button-border: #334155;
+  --button-text: #e2e8f0;
+  --button-hover: #273449;
+  --result-bg: #1e293b;
+  --result-hover: #2a3b54;
+  --modal-bg: #162033;
+  --modal-text: #e2e8f0;
+  --backtotop-grad1: #3b82f6;
+  --backtotop-grad2: #2563eb;
+  --shadow-strong: rgba(0, 0, 0, 0.55);
 }
 
 /* =========================================================
